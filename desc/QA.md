@@ -34,8 +34,6 @@ $value = $arr[$i]; // $i 是$arr的索引
 
 #### <div id="str转int时超过最大值问题"> str转int时超过最大值问题</div>
 
-#### <div id="file_get_content"> file_get_content函数读取大文件时的问题</div>
-
 
 
 ​	

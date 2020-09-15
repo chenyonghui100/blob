@@ -13,31 +13,34 @@
 * 要查找数字比左下角数字小时，上移
 
 ##### 代码实现：
-	<?php
+```php
+<?php
 
-	function Find($target, $array)
-	{
-	    // write code here
-	    
-	      $lon = count($array);//二维数组长度
-	
-	
-	    return seach2($lon-1,0,$array,$target);
-	}
-	
-	function seach2($lon,$com,$array,$target){
-	    $comn = count($array[0]);//二维数组内数组长度
-	    if($lon<0 ||$com >= $comn){
-	        return false;
-	    }
-	    if($array[$lon][$com]<$target){
-	        return seach2($lon,$com+1,$array,$target);
-	    }elseif($array[$lon][$com]>$target){
-	        return seach2($lon-1,$com,$array,$target);
-	    }else{
-	        return true;
-	    }
-	}
+function Find($target, $array)
+{
+    // write code here
+    
+      $lon = count($array);//二维数组长度
+       return seach2($lon-1,0,$array,$target);
+}
+
+function seach2($lon,$com,$array,$target){
+    $comn = count($array[0]);//二维数组内数组长度
+    if($lon<0 ||$com >= $comn){
+        return false;
+    }
+    if($array[$lon][$com]<$target){
+        return seach2($lon,$com+1,$array,$target);
+    }elseif($array[$lon][$com]>$target){
+        return seach2($lon-1,$com,$array,$target);
+    }else{
+        return true;
+    }
+}
+```
+
+
+
 ### <div id="替换空格"> 替换空格</div> 
 
 #### 题目描述
@@ -50,15 +53,17 @@
 * 然后使用数组转字符串函数（implode('',$arr)）使用‘%20’连接起来
 
 ##### 代码实现：
-	<?php
-	function replaceSpace($str)
-	{
-	    // write code here
-	    
-	    $arr = explode(' ',$str);
-	    $strs = implode('%20',$arr);
-	    return $strs;
-	}
+```php
+<?php
+function replaceSpace($str)
+{
+    // write code here
+    
+    $arr = explode(' ',$str);
+    $strs = implode('%20',$arr);
+    return $strs;
+}
+```
 ### <div id="重建二叉树"> 重建二叉树</div> 
 #### 题目描述
 输入某二叉树的前序遍历和中序遍历的结果，请重建出该二叉树。假设输入的前序遍历和中序遍历的结果中都不含重复的数字。例如输入前序遍历序列{1,2,4,7,3,5,6,8}和中序遍历序列{4,7,2,1,5,3,8,6}，则重建二叉树并返回。。
@@ -70,27 +75,29 @@
 * 2.使用递归来解决
 
 ##### 代码实现：
-	<?php
-	
-	class TreeNode{
-	    var $val;
-	    var $left = NULL;
-	    var $right = NULL;
-	    function __construct($val){
-	        $this->val = $val;
-	    }
-	}
-	function reConstructBinaryTree($pre, $vin)
-	{
-	    if($pre && $vin){
-	        $treeRoot = new TreeNode($pre[0]);
-	        $index = array_search($pre[0],$vin);
-	        $treeRoot->left = reConstructBinaryTree(array_slice($pre,1,$index),array_slice($vin,0,$index));
-	        $treeRoot->right = reConstructBinaryTree(array_slice($pre,$index+1),array_slice($vin,$index+1));
-	        return $treeRoot;
-	    }
-	 
-	}
+```php
+<?php
+
+class TreeNode{
+    var $val;
+    var $left = NULL;
+    var $right = NULL;
+    function __construct($val){
+        $this->val = $val;
+    }
+}
+function reConstructBinaryTree($pre, $vin)
+{
+    if($pre && $vin){
+        $treeRoot = new TreeNode($pre[0]);
+        $index = array_search($pre[0],$vin);
+        $treeRoot->left = reConstructBinaryTree(array_slice($pre,1,$index),array_slice($vin,0,$index));
+        $treeRoot->right = reConstructBinaryTree(array_slice($pre,$index+1),array_slice($vin,$index+1));
+        return $treeRoot;
+    }
+ 
+}
+```
 
 解读：首先需要有一个节点类，用来实例化节点对象，二叉树的节点有三个属性，data，left，right。
 函数：array_search($pre[0],$vin);返回数组中$pre[0]的下标。因为先序遍历的第一个数是根节点，所以中序遍历所对应的数字节点可以将原序列分为两部分（left和right）。
@@ -112,30 +119,32 @@ array_slice($arr,$start,$len)
 * 首先需要一个空节点，头指针的next要指向这个空节点(注意，这个时候原头结点的next需要用一个指针指到这个节点上，否则会丢失节点)。之后循环遍历，将节点逆置
 
 ##### 代码实现：
-	
-	<?php
-	/*class ListNode{
-	    var $val;
-	    var $next = NULL;
-	    function __construct($x){
-	        $this->val = $x;
-	    }
-	}*/
-	function ReverseList($pHead)
-	{
-	    // write code here
-	     $pre = null;
-	    while($pHead != null){
-	        $tmp = $pHead->next;      
-	        $pHead->next = $pre;
-	        $pre = $pHead;
-	        $pHead = $tmp;
-	    }
-	    return $pre;
-	}
+
+```php
+<?php
+/*class ListNode{
+    var $val;
+    var $next = NULL;
+    function __construct($x){
+        $this->val = $x;
+    }
+}*/
+function ReverseList($pHead)
+{
+    // write code here
+     $pre = null;
+    while($pHead != null){
+        $tmp = $pHead->next;      
+        $pHead->next = $pre;
+        $pre = $pHead;
+        $pHead = $tmp;
+    }
+    return $pre;
+}
+```
 >最后$pHead指在空节点上，$pre指在最后一个非空节点上，所以应该return $pre;
 
 
 
 
-	
+​	
